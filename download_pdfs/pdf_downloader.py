@@ -16,6 +16,7 @@ from semanticscholar import SemanticScholar
 import time
 
 from .preprocessing import get_all_research_papers, get_unique_papers, get_domain_count
+from .database import upload_csv_to_supabase
 
 def clean_filename(title: str) -> str:
     return "".join(x for x in title if x.isalnum() or x in " -_").strip()
@@ -132,7 +133,9 @@ def download_research_papers():
 
     # get_domain_count()
 
-    download_with_api('download_pdfs/research_paper_unique.csv')
+    # download_with_api('download_pdfs/research_paper_unique.csv')
 
     # download_from_semantic_scholar('download_pdfs/research_paper_unique.csv')
+
+    upload_csv_to_supabase('download_pdfs/research_paper_unique.csv')
 
