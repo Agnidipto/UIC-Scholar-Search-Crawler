@@ -75,3 +75,6 @@ geckodriver
 
 # Thumbnails
 ._*
+
+download_pdfs/arxiv_downloaded/
+download_pdfs/semantic_scholar/

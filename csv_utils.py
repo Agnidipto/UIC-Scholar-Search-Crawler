@@ -43,7 +43,7 @@ def merge_csv(csv_path_1: str, csv_path_2: str, output_file: str, key_cols: List
         key_cols: List of column names to use as merge keys
 
     Example:
-        merge_csv('uic_staff.csv', 'scholar_ids.csv', 'merged.csv', ['name'])
+        merge_csv('uic_staff.csv', 'scholar_ids.csv', 'uic_staff_user_ids.csv', ['name'])
     """
     
     csv_data1, fieldnames1 = read_csv(csv_path_1)
@@ -103,6 +103,22 @@ def read_user_ids(csv_file_path: str) -> List[UserID]:
         }
         data.append(user_id_data)
     return data
+
+def extract_staff_names(csv_file_path: str) -> List[str]:
+    csv_data, _ = read_csv(csv_file_path)
+    return list(map(lambda x: x['name'], csv_data))
+
+def compare_csv_files(csv_file_path_1: str, csv_file_path_2: str) -> List[str]:
+    csv_data_1_staff_names = extract_staff_names(csv_file_path_1)
+    csv_data_2_staff_names = extract_staff_names(csv_file_path_2)
+
+    name_list: List[str] = []
+
+    for csv_data_1_staff_name in csv_data_1_staff_names:
+        if csv_data_1_staff_name not in csv_data_2_staff_names:
+            name_list.append(csv_data_1_staff_name)
+    
+    return name_list
 
         
 
